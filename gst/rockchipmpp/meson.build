@@ -27,3 +27,11 @@ rockchipmpp = library('gstrockchipmpp',
   install : true,
   install_dir : plugins_install_dir,
 )
+
+pkgconfig = import('pkgconfig')
+
+pkgconfig.generate(rockchipmpp, 
+  description: 'Rockchip gstreamer library',
+  name: 'libgstrockchipmpp',
+  version : '1.0',
+)

@@ -1,5 +1,5 @@
 project('gst-plugins-bad', 'c',
-  version : '1.14.4',
+  version : '1.23.0.1',
   license : 'LGPL',
   meson_version : '>= 0.47',
   default_options : [ 'warning_level=2',

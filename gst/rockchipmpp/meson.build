@@ -32,6 +32,6 @@ pkgconfig = import('pkgconfig')
 
 pkgconfig.generate(rockchipmpp, 
   description: 'Rockchip gstreamer library',
-  name: 'libgstrockchipmpp',
+  name: 'gstrockchipmpp',
   version : '1.0',
 )

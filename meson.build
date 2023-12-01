@@ -1,5 +1,5 @@
 project('gst-plugins-bad', 'c',
-  version : '1.23.0.1',
+  version : '1.22.6',
   license : 'LGPL',
   meson_version : '>= 0.47',
   default_options : [ 'warning_level=2',
@@ -85,6 +85,7 @@ glib_dep = dependency('glib-2.0', version : glib_req,
   fallback : ['glib', 'libglib_dep'])
 x11_dep = dependency('x11', required : get_option('rkximage'))
 drm_dep = dependency('libdrm', required : get_option('rkximage'))
+drm_dep = dependency('libdrm', required : get_option('rockchipmpp'))
 mpp_dep = dependency('rockchip_mpp', required : get_option('rockchipmpp'))
 rga_dep = dependency('librga', required : get_option('rga'))
 

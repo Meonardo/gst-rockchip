@@ -21,7 +21,7 @@ endif
 
 rockchipmpp = library('gstrockchipmpp',
   rockchipmpp_sources,
-  c_args : [gst_rockchip_args, '-Wextra'],
+  c_args : [gst_rockchip_args, '-Wextra', '-DLINUX', '-DANDROID_VNDK'],
   include_directories : configinc,
   dependencies : [gstbase_dep, gstvideo_dep, gstallocators_dep, gstpbutils_dep, mpp_dep, rga_dep],
   install : true,

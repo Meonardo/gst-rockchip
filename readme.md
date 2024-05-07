@@ -59,3 +59,19 @@
 		LOGE(TAG, "rockchipmpp not loaded");
 	}
   ```  
+
+### Example of pipeline
+* decode rtsp stream and display on screen:
+    ```cpp
+    auto pipeline_desc = g_strdup_printf(
+            "rtspsrc location=%s name=source latency=50 protocols=4 tcp-timeout=5000000 ! queue ! rtph264depay ! h264parse ! mppvideodec ! queue ! glimagesink",
+            uri.c_str());
+
+    GError* error = nullptr;
+    pipeline = gst_parse_launch(pipeline_desc, &error);
+    g_free(pipeline_desc);
+    if (pipeline == nullptr || error != nullptr) {
+        LOGE(TAG, "failed to create pipeline, erorr: %s", error->message);
+        return;
+    }
+    ```  

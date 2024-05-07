@@ -25,6 +25,15 @@
 #include "config.h"
 #endif
 
+#define GST_API_VERSION "1.0"
+#define GST_LICENSE "LGPL"
+#define PACKAGE "gst-rockchipmpp"
+#define GST_PACKAGE_NAME "GStreamer rock-chip MPP plugin"
+#define GST_PACKAGE_ORIGIN "Rock-chip"
+#define PACKAGE_NAME "GStreamer rock-chip MPP plugin"
+#define PACKAGE_VERSION "1.22.9"
+#define VERSION "1.22.9"
+
 #include <string.h>
 
 #include <gst/allocators/gstdmabuf.h>

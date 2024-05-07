@@ -33,8 +33,8 @@
 #define GST_MPP_H265_ENC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_H265_ENC, GstMppH265Enc))
 
+GST_DEBUG_CATEGORY_STATIC (mpp_h265_enc_debug);
 #define GST_CAT_DEFAULT mpp_h265_enc_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 struct _GstMppH265Enc
 {
@@ -287,7 +287,7 @@ gst_mpp_h265_enc_class_init (GstMppH265EncClass * klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mpph265enc", 0,
+  GST_DEBUG_CATEGORY_INIT (mpp_h265_enc_debug, "mpph265enc", 0,
       "MPP H265 encoder");
 
   encoder_class->set_format = GST_DEBUG_FUNCPTR (gst_mpp_h265_enc_set_format);

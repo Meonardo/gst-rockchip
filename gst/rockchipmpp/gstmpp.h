@@ -26,8 +26,14 @@
 #include <gst/allocators/gstdmabuf.h>
 
 #ifdef HAVE_RGA
-#include <rga/rga.h>
-#include <rga/RgaApi.h>
+
+#ifdef ANDROID
+#undef ANDROID
+#endif
+
+#include <rga.h>
+#include <RgaApi.h>
+
 #endif
 
 #include <rockchip/rk_mpi.h>

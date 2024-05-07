@@ -32,8 +32,8 @@
 #define GST_MPP_JPEG_DEC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_JPEG_DEC, GstMppJpegDec))
 
+GST_DEBUG_CATEGORY_STATIC (mpp_jpeg_dec_debug);
 #define GST_CAT_DEFAULT mpp_jpeg_dec_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 struct _GstMppJpegDec
 {
@@ -303,7 +303,7 @@ gst_mpp_jpeg_dec_set_format (GstVideoDecoder * decoder,
     }
 
     /* Conversion required */
-    GST_INFO_OBJECT (self, "convert from %s (%dx%d) to %s (%dx%d)",
+    GST_DEBUG_OBJECT (self, "convert from %s (%dx%d) to %s (%dx%d)",
         gst_mpp_video_format_to_string (src_format), width, height,
         gst_mpp_video_format_to_string (dst_format), dst_width, dst_height);
 
@@ -435,7 +435,7 @@ gst_mpp_jpeg_dec_poll_mpp_frame (GstVideoDecoder * decoder, gint timeout_ms)
 }
 
 static gboolean
-gst_mpp_jpeg_dec_shutdown (GstVideoDecoder * decoder, gboolean drain UNUSED)
+gst_mpp_jpeg_dec_shutdown (GstVideoDecoder * decoder, gboolean drain)
 {
   GstMppJpegDec *self = GST_MPP_JPEG_DEC (decoder);
   GstMppDec *mppdec = GST_MPP_DEC (decoder);
@@ -548,7 +548,7 @@ gst_mpp_jpeg_dec_class_init (GstMppJpegDecClass * klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mppjpegdec", 0,
+  GST_DEBUG_CATEGORY_INIT (mpp_jpeg_dec_debug, "mppjpegdec", 0,
       "MPP JPEG decoder");
 
   decoder_class->start = GST_DEBUG_FUNCPTR (gst_mpp_jpeg_dec_start);

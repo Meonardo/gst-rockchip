@@ -33,8 +33,8 @@
 #define GST_MPP_VP8_ENC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_VP8_ENC, GstMppVp8Enc))
 
+GST_DEBUG_CATEGORY_STATIC (mpp_vp8_enc_debug);
 #define GST_CAT_DEFAULT mpp_vp8_enc_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 struct _GstMppVp8Enc
 {
@@ -255,7 +255,7 @@ gst_mpp_vp8_enc_class_init (GstMppVp8EncClass * klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mppvp8enc", 0, "MPP VP8 encoder");
+  GST_DEBUG_CATEGORY_INIT (mpp_vp8_enc_debug, "mppvp8enc", 0, "MPP VP8 encoder");
 
   encoder_class->set_format = GST_DEBUG_FUNCPTR (gst_mpp_vp8_enc_set_format);
   encoder_class->handle_frame =

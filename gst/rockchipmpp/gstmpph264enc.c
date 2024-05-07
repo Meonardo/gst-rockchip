@@ -36,8 +36,8 @@
 #define GST_MPP_H264_ENC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_H264_ENC, GstMppH264Enc))
 
+GST_DEBUG_CATEGORY_STATIC (mpp_h264_enc_debug);
 #define GST_CAT_DEFAULT mpp_h264_enc_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 typedef enum
 {
@@ -400,7 +400,7 @@ gst_mpp_h264_enc_class_init (GstMppH264EncClass * klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mpph264enc", 0,
+  GST_DEBUG_CATEGORY_INIT (mpp_h264_enc_debug, "mpph264enc", 0,
       "MPP H264 encoder");
 
   encoder_class->set_format = GST_DEBUG_FUNCPTR (gst_mpp_h264_enc_set_format);

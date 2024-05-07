@@ -31,8 +31,8 @@
 #include "gstmppallocator.h"
 #include "gstmppenc.h"
 
+GST_DEBUG_CATEGORY_STATIC (mpp_enc_debug);
 #define GST_CAT_DEFAULT mpp_enc_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 #define parent_class gst_mpp_enc_parent_class
 G_DEFINE_ABSTRACT_TYPE (GstMppEnc, gst_mpp_enc, GST_TYPE_VIDEO_ENCODER);
@@ -607,7 +607,7 @@ gst_mpp_enc_apply_strides (GstVideoEncoder * encoder, gint hstride,
       vstride == GST_MPP_VIDEO_INFO_VSTRIDE (info))
     return TRUE;
 
-  GST_INFO_OBJECT (self, "strides updated to (%dx%d)", hstride, vstride);
+  GST_DEBUG_OBJECT (self, "strides updated to (%dx%d)", hstride, vstride);
 
   self->prop_dirty = TRUE;
   return gst_mpp_video_info_align (info, hstride, vstride);
@@ -672,14 +672,14 @@ gst_mpp_enc_set_format (GstVideoEncoder * encoder, GstVideoCodecState * state)
     if (!gst_mpp_enc_video_info_align (info))
       return FALSE;
 
-    GST_INFO_OBJECT (self, "converting to aligned %s",
+    GST_DEBUG_OBJECT (self, "converting to aligned %s",
         gst_mpp_video_format_to_string (GST_VIDEO_INFO_FORMAT (info)));
   }
 
   hstride = GST_MPP_VIDEO_INFO_HSTRIDE (info);
   vstride = GST_MPP_VIDEO_INFO_VSTRIDE (info);
 
-  GST_INFO_OBJECT (self, "applying %s%s %dx%d (%dx%d)",
+  GST_DEBUG_OBJECT (self, "applying %s%s %dx%d (%dx%d)",
       gst_mpp_video_format_to_string (GST_VIDEO_INFO_FORMAT (info)),
       self->arm_afbc ? "(AFBC)" : "", width, height, hstride, vstride);
 
@@ -833,17 +833,10 @@ gst_mpp_enc_convert (GstVideoEncoder * encoder, GstVideoCodecFrame * frame)
   src_hstride = GST_MPP_VIDEO_INFO_HSTRIDE (&src_info);
   src_vstride = GST_MPP_VIDEO_INFO_VSTRIDE (&src_info);
 
-  /**
-   * Update the strides of the dst video info temporarily to test if we
-   * can use the src buffer directly.
-   */
   if (!gst_mpp_video_info_align (&dst_info, src_hstride, src_vstride) ||
       !gst_mpp_enc_video_info_align (&dst_info) ||
-      !gst_mpp_video_info_matched (&src_info, &dst_info)) {
-    /* Reset the temporarily modified dst video info. */
-    dst_info = self->info;
+      !gst_mpp_video_info_matched (&src_info, &dst_info))
     goto convert;
-  }
 
   gst_mpp_enc_apply_strides (encoder, src_hstride, src_vstride);
   if (!gst_mpp_enc_apply_properties (encoder))
@@ -902,6 +895,7 @@ out:
   gst_buffer_copy_into (outbuf, inbuf,
       GST_BUFFER_COPY_FLAGS | GST_BUFFER_COPY_TIMESTAMPS, 0, 0);
 
+  dst_info = self->info;
   gst_buffer_add_video_meta_full (outbuf, GST_VIDEO_FRAME_FLAG_NONE,
       GST_VIDEO_INFO_FORMAT (&dst_info),
       GST_VIDEO_INFO_WIDTH (&dst_info), GST_VIDEO_INFO_HEIGHT (&dst_info),
@@ -931,7 +925,7 @@ gst_mpp_enc_force_keyframe (GstVideoEncoder * encoder, gboolean keyframe)
     return gst_mpp_enc_apply_properties (encoder);
   }
 
-  GST_INFO_OBJECT (self, "forcing keyframe");
+  GST_DEBUG_OBJECT (self, "forcing keyframe");
   mpp_enc_cfg_set_s32 (self->mpp_cfg, "rc:gop", 1);
 
   if (self->mpi->control (self->mpp_ctx, MPP_ENC_SET_CFG, self->mpp_cfg)) {
@@ -1089,7 +1083,7 @@ gst_mpp_enc_loop (GstVideoEncoder * encoder)
   GST_VIDEO_ENCODER_STREAM_LOCK (encoder);
 
   if (self->flushing && !self->pending_frames) {
-    GST_INFO_OBJECT (self, "flushing");
+    GST_DEBUG_OBJECT (self, "flushing");
     self->task_ret = GST_FLOW_FLUSHING;
     goto out;
   }
@@ -1298,7 +1292,7 @@ gst_mpp_enc_class_init (GstMppEncClass * klass)
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
   const gchar *env;
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mppenc", 0, "MPP encoder");
+  GST_DEBUG_CATEGORY_INIT (mpp_enc_debug, "mppenc", 0, "MPP encoder");
 
   encoder_class->start = GST_DEBUG_FUNCPTR (gst_mpp_enc_start);
   encoder_class->stop = GST_DEBUG_FUNCPTR (gst_mpp_enc_stop);

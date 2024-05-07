@@ -3,10 +3,10 @@
 * In source build on Android platform.
   
 ### Notice
-* build or get `gstreamer_android.so` first;
+* build or get `libgstreamer_android.so` first;
 * build or get `librockchip_mpp.so` from Rockchip's repos;
 * build or get `librga.so` if need enable `HAVE_RGA` option in `rockchipmpp` plugin;
-* in project cmake file, make sure the all the dependencies are correctly set:
+* in project cmake file, make sure all the dependencies are correctly set:
   ```cmake
     set(GSTREAMER_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gstreamer-1.22.9/${ANDROID_ABI})
     #set(GSTREAMER_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/gstreamer-1.22.2/${ANDROID_ABI})

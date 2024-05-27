@@ -31,8 +31,8 @@
 #define GST_MPP_VIDEO_DEC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_VIDEO_DEC, GstMppVideoDec))
 
+GST_DEBUG_CATEGORY_STATIC(mpp_video_dec_debug);
 #define GST_CAT_DEFAULT mpp_video_dec_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 struct _GstMppVideoDec
 {
@@ -366,8 +366,8 @@ gst_mpp_video_dec_class_init (GstMppVideoDecClass * klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mppvideodec", 0,
-      "MPP video decoder");
+  GST_DEBUG_CATEGORY_INIT(mpp_video_dec_debug, "mppvideodec", 0,
+                          "MPP video decoder");
 
   decoder_class->set_format = GST_DEBUG_FUNCPTR (gst_mpp_video_dec_set_format);
 

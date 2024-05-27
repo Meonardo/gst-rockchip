@@ -36,8 +36,8 @@ G_DECLARE_FINAL_TYPE (GstMppAllocator, gst_mpp_allocator, GST,
 #define GST_MPP_ALLOCATOR(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_ALLOCATOR, GstMppAllocator))
 
+GST_DEBUG_CATEGORY_STATIC(mppallocator_debug);
 #define GST_CAT_DEFAULT mppallocator_debug
-GST_DEBUG_CATEGORY_STATIC (GST_CAT_DEFAULT);
 
 #define GST_ALLOCATOR_MPP "mpp"
 
@@ -319,7 +319,8 @@ gst_mpp_allocator_class_init (GstMppAllocatorClass * klass)
   GstAllocatorClass *allocator_class = GST_ALLOCATOR_CLASS (klass);
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mppallocator", 0, "MPP allocator");
+  GST_DEBUG_CATEGORY_INIT(mppallocator_debug, "mppallocator", 0,
+                          "MPP allocator");
 
   allocator_class->alloc = GST_DEBUG_FUNCPTR (gst_mpp_allocator_alloc);
   allocator_class->free = GST_DEBUG_FUNCPTR (gst_mpp_allocator_free);

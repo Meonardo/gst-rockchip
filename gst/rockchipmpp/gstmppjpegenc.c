@@ -33,8 +33,8 @@
 #define GST_MPP_JPEG_ENC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_JPEG_ENC, GstMppJpegEnc))
 
+GST_DEBUG_CATEGORY_STATIC(mpp_jpeg_enc_debug);
 #define GST_CAT_DEFAULT mpp_jpeg_enc_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 struct _GstMppJpegEnc
 {
@@ -207,8 +207,8 @@ gst_mpp_jpeg_enc_class_init (GstMppJpegEncClass * klass)
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mppjpegenc", 0,
-      "MPP JPEG encoder");
+  GST_DEBUG_CATEGORY_INIT(mpp_jpeg_enc_debug, "mppjpegenc", 0,
+                          "MPP JPEG encoder");
 
   encoder_class->set_format = GST_DEBUG_FUNCPTR (gst_mpp_jpeg_enc_set_format);
   encoder_class->handle_frame =

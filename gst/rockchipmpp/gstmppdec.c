@@ -29,8 +29,8 @@
 #include "gstmppallocator.h"
 #include "gstmppdec.h"
 
+GST_DEBUG_CATEGORY_STATIC(mpp_dec_debug);
 #define GST_CAT_DEFAULT mpp_dec_debug
-GST_DEBUG_CATEGORY (GST_CAT_DEFAULT);
 
 #define parent_class gst_mpp_dec_parent_class
 G_DEFINE_ABSTRACT_TYPE (GstMppDec, gst_mpp_dec, GST_TYPE_VIDEO_DECODER);
@@ -1120,7 +1120,7 @@ gst_mpp_dec_class_init (GstMppDecClass * klass)
   GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
   const gchar *env;
 
-  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "mppdec", 0, "MPP decoder");
+  GST_DEBUG_CATEGORY_INIT(mpp_dec_debug, "mppdec", 0, "MPP decoder");
 
   decoder_class->start = GST_DEBUG_FUNCPTR (gst_mpp_dec_start);
   decoder_class->stop = GST_DEBUG_FUNCPTR (gst_mpp_dec_stop);

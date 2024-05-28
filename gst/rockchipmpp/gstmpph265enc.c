@@ -33,8 +33,8 @@
 #define GST_MPP_H265_ENC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_H265_ENC, GstMppH265Enc))
 
-GST_DEBUG_CATEGORY_STATIC(mpp_h265_enc_debug);
 #define GST_CAT_DEFAULT mpp_h265_enc_debug
+GST_DEBUG_CATEGORY_STATIC(mpp_h265_enc_debug);
 
 struct _GstMppH265Enc
 {

@@ -32,8 +32,8 @@
 #define GST_MPP_JPEG_DEC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_JPEG_DEC, GstMppJpegDec))
 
-GST_DEBUG_CATEGORY_STATIC(mpp_jpeg_dec_debug);
 #define GST_CAT_DEFAULT mpp_jpeg_dec_debug
+GST_DEBUG_CATEGORY_STATIC(mpp_jpeg_dec_debug);
 
 struct _GstMppJpegDec
 {

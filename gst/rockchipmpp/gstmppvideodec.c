@@ -31,8 +31,8 @@
 #define GST_MPP_VIDEO_DEC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_VIDEO_DEC, GstMppVideoDec))
 
-GST_DEBUG_CATEGORY_STATIC(mpp_video_dec_debug);
 #define GST_CAT_DEFAULT mpp_video_dec_debug
+GST_DEBUG_CATEGORY_STATIC(mpp_video_dec_debug);
 
 struct _GstMppVideoDec
 {

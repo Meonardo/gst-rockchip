@@ -33,8 +33,8 @@
 #define GST_MPP_VP8_ENC(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_VP8_ENC, GstMppVp8Enc))
 
-GST_DEBUG_CATEGORY_STATIC(mpp_vp8_enc_debug);
 #define GST_CAT_DEFAULT mpp_vp8_enc_debug
+GST_DEBUG_CATEGORY_STATIC(mpp_vp8_enc_debug);
 
 struct _GstMppVp8Enc
 {

@@ -36,8 +36,8 @@ G_DECLARE_FINAL_TYPE (GstMppAllocator, gst_mpp_allocator, GST,
 #define GST_MPP_ALLOCATOR(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
     GST_TYPE_MPP_ALLOCATOR, GstMppAllocator))
 
-GST_DEBUG_CATEGORY_STATIC(mppallocator_debug);
 #define GST_CAT_DEFAULT mppallocator_debug
+GST_DEBUG_CATEGORY_STATIC(mppallocator_debug);
 
 #define GST_ALLOCATOR_MPP "mpp"
 

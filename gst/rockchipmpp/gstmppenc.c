@@ -31,8 +31,8 @@
 #include "gstmppallocator.h"
 #include "gstmppenc.h"
 
-GST_DEBUG_CATEGORY_STATIC(mpp_enc_debug);
 #define GST_CAT_DEFAULT mpp_enc_debug
+GST_DEBUG_CATEGORY_STATIC(mpp_enc_debug);
 
 #define parent_class gst_mpp_enc_parent_class
 G_DEFINE_ABSTRACT_TYPE (GstMppEnc, gst_mpp_enc, GST_TYPE_VIDEO_ENCODER);
